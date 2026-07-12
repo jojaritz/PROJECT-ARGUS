@@ -186,3 +186,25 @@ Phase 4 — Multi-Camera Localization
  - Add synchronized camera streams.
  - Investigate 3D localization and triangulation.
  - Evaluate calibration accuracy and multi-camera tracking performance.
+
+ ### Experiment 1.1 — Stock YOLO Feasibility Baseline
+Measurement	Result
+Host system	M1 Pro MacBook Pro
+Input video	iPhone 13 Mini main camera, 3840 × 2160, 60 fps
+Model	Ultralytics YOLOv8 Nano (yolov8n.pt)
+Detector input size	1280 pixels
+Detection result	Drone detected in favorable sky/cloud scenes
+Observed predicted class	Record exact displayed YOLO class label
+Typical inference time	Approximately 75 ms per frame
+Brief worst observed inference time	Over 100 ms
+Approximate inference rate	Approximately 13 fps at typical inference time
+Sky/cloud performance	Generally accurate; occasional kite classification
+Tree-background performance	Drone not detected reliably
+False positives	Birds were sometimes classified as kites
+Result	Partial pass: stock model demonstrates feasibility in favorable scenes, but does not meet the latency target on the M1 Pro and fails the tree-background condition.
+
+### What we learned against your requirements
+Requirement	Current status	Reason
+Median IoU ≥ 0.60	Not evaluated yet	Requires human-labeled ground-truth boxes.
+Median software latency ≤ 33 ms	Not met on M1 Pro at 1280	Typical model inference was about 75 ms, excluding most logging/display work.
+No loss >15 frames at 30 fps	Not met for tree scenes	The detector missed the drone through tree-background portions.
