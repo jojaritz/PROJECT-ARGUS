@@ -24,17 +24,7 @@ Design and evaluate a safe, non-contact aerial-target observation system that de
 
 ## 3. Hardware and Development Stack
 
-       Category	                        Current plan
-Primary workstation	          |  Windows 11 desktop with NVIDIA RTX 2080
-Mobile/development system     |  MacBook Pro with M1 Pro
-Primary live-camera candidate	|  Sony FDR-AX33 camcorder
-Secondary live-camera         |	 Canon EOS R50 with RF-S 18–45 mm lens
-candidate          
-Baseline data camera          |	 iPhone 13 Mini main camera
-Initial test target           |	 DJI Mini 2 SE, stock configuration
-Planned live-video interface	|  USB 3 HDMI capture device, pending acquisition and acceptance testing
-Development environment       |	 Python, VS Code, OpenCV, NumPy, PyTorch/Ultralytics YOLO
-Initial input data	          |  iPhone 13 Mini video recorded at 3840×2160, 60 fps
+CategoryCurrent planPrimary workstationWindows 11 desktop with NVIDIA RTX 2080Mobile/development systemMacBook Pro with M1 ProPrimary live-camera candidateSony FDR-AX33 camcorderSecondary live-camera candidateCanon EOS R50 with RF-S 18–45 mm lensBaseline data cameraiPhone 13 Mini main cameraInitial test targetDJI Mini 2 SE, stock configurationPlanned live-video interfaceUSB 3 HDMI capture device, pending acquisition and acceptance testingDevelopment environmentPython, VS Code, OpenCV, NumPy, PyTorch/Ultralytics YOLOInitial input dataiPhone 13 Mini video recorded at 3840×2160, 60 fps
 
 
 ## 4. Baseline Test Conditions
@@ -208,3 +198,22 @@ Requirement	Current status	Reason
 Median IoU ≥ 0.60	Not evaluated yet	Requires human-labeled ground-truth boxes.
 Median software latency ≤ 33 ms	Not met on M1 Pro at 1280	Typical model inference was about 75 ms, excluding most logging/display work.
 No loss >15 frames at 30 fps	Not met for tree scenes	The detector missed the drone through tree-background portions.
+
+
+### Experiment 1.1 — Stock YOLO Feasibility Baseline
+Category	Measurement / Result
+Host System	M1 Pro MacBook Pro
+Input Video	iPhone 13 Mini (4K, 60 fps)
+Model	Ultralytics YOLOv8 Nano (yolov8n.pt)
+Inference Res	1280 pixels
+Primary Class	airplane
+Avg Latency	~75 ms (M1 Pro)
+Peak Latency	>100 ms
+Sky Perf	Generally accurate; occasional kite classification
+Tree Perf	Failure (Target not recognized)
+Result	Partial Pass. Stock weights work for sky, but fail for clutter.
+Experiment 1.2 — Visual Fidelity Deep-Dive
+Scenario	Visible (Normal)	Visible (Zoom)	Apperance
+Sky Frame	Yes	Yes	Somewhat blurry
+Tree Frame	Yes	Yes	Heavily blurred; blended contrast
+Conclusion: The tree-background failure is at least partially caused by image formation issues (motion blur/compression) rather than just model intelligence.
