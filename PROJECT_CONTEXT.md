@@ -24,18 +24,17 @@ Design and evaluate a safe, non-contact aerial-target observation system that de
 
 ## 3. Hardware and Development Stack
 
-| Category                        | Current plan                                                          |
-|:--------------------------------|:----------------------------------------------------------------------|
-| Primary workstation             | Windows 11 desktop with NVIDIA RTX 2080                               |
-| Mobile/development system       | MacBook Pro with M1 Pro                                               |
-| Primary live-camera candidate   | Sony FDR-AX33 camcorder                                               |
-| Secondary live-camera candidate | Canon EOS R50 with RF-S 18–45 mm lens                                 |
-| Baseline data camera            | iPhone 13 Mini main camera                                            |
-| Initial test target             | DJI Mini 2 SE, stock configuration                                    |
-| Planned live-video interface    | USB 3 HDMI capture device, pending acquisition and acceptance testing |
-| Development environment         | Python, VS Code, OpenCV, NumPy, PyTorch/Ultralytics YOLO              |
-| Initial input data              | iPhone 13 Mini video recorded at 3840×2160, 60 fps                    |
-
+| Category | Current plan |
+|:---|:---|
+| Primary workstation | Windows 11 desktop with NVIDIA RTX 2080 |
+| Mobile/development system | MacBook Pro with M1 Pro |
+| Primary live-camera candidate | Sony FDR-AX33 camcorder |
+| Secondary live-camera candidate | Canon EOS R50 with RF-S 18–45 mm lens |
+| Baseline data camera | iPhone 13 Mini main camera |
+| Initial test target | DJI Mini 2 SE, stock configuration |
+| Planned live-video interface | USB 3 HDMI capture device, pending acquisition and acceptance testing |
+| Development environment | Python, VS Code, OpenCV, NumPy, PyTorch/Ultralytics YOLO |
+| Initial input data | iPhone 13 Mini video recorded at 3840×2160, 60 fps |
 
 ## 4. Baseline Test Conditions
 
