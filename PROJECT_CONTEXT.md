@@ -243,4 +243,32 @@ Phase 4 — Multi-Camera Localization
 | SKY-04  | `Video_1.4` | 20–40 ft | Sky | Yes | Consistently `airplane` | Very accurate detection under sky-background conditions. |
 | SKY-05  | `Video_1.5` | 40–70 ft | Sky | Yes | Consistently `airplane` | Very accurate detection at this range under sky-background conditions. |
 
+### Experiment 1.5 — Quantitative Detection Evaluation
+| Metric | Video 1 (Sky / Long Range) | Video 2 (Trees / Clutter) |
+|:---|:---|:---|
+| Annotated Frames | 69 | 102 |
+| Median IoU | 0.787 | 0.000|
+| Success Rate (IoU >= 0.6) | 81.2% | 36.3%|
+| Total Misses (IoU = 0) | 12 | 64 |
+| False Classifications | `airplane`, `kite` | `airplane`, `bird`, `kite`, `bear`, `traffic light` |
 
+### Experiment 1.6 — Detector + Kalman Filter Integration
+
+**Test condition:** Video 2, tree/clutter background, YOLOv8n detector with a
+constant-velocity Kalman filter and up to 20 predicted-only frames.
+
+**Observed behavior:**
+- The tracker maintained an accurate estimate for approximately 15–25 frames
+  after temporary detector loss.
+- Tracking was visually near-perfect in sky-background portions of the test.
+- The tracker reduced the effect of several transient detector
+  misclassifications.
+- In one cluttered segment, YOLO classified a lamp as `kite`. The association
+  logic attached the tracker to this false detection for approximately
+  100 frames, despite valid drone detections occurring later.
+
+**Conclusion:**
+A Kalman filter improves short-gap continuity but cannot independently identify
+the correct target. Robust tracking requires target-association gates that
+consider motion consistency, box-size consistency, and initialization of the
+intended target.
