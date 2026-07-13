@@ -231,6 +231,7 @@ Phase 4 — Multi-Camera Localization
 ### Experiment 1.4 — Representative Stock-YOLO Evaluation Manifest
 
 > All entries are qualitative observations from the stock YOLO baseline. Exact detection accuracy will be calculated later from human-labeled ground-truth bounding boxes.
+
 | ID | Source Video | Approximate Range | Background | Human Can See Drone? | Observed YOLO Result | Notes |
 |:---|:---|:---|:---|:---|:---|:---|
 | TREE-01 | `Video_2.1` | 7–10 ft | Trees | Yes | `bird` / `bear` incorrect classification | Very close target. YOLO box was concentrated around the drone/camera area rather than identifying the full drone as `airplane`. |
