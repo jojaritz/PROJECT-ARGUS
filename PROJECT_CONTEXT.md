@@ -272,3 +272,28 @@ A Kalman filter improves short-gap continuity but cannot independently identify
 the correct target. Robust tracking requires target-association gates that
 consider motion consistency, box-size consistency, and initialization of the
 intended target.
+
+### Experiment 1.7 — Gated Association and Class Priority
+
+**Change tested:**
+- Added manual target initialization.
+- Added class-aware association, prioritizing `airplane` detections over
+  `kite` and `bird`.
+- Tested relaxed spatial and size gates.
+
+**Result:**
+- Class priority produced a qualitative improvement over the previous gated
+  version.
+- Manual initialization did not materially improve acquisition or sustained
+  tracking in the tree-background sequence.
+- The system often lost the selected drone shortly after initialization because
+  the detector did not provide a sufficiently stable drone detection against
+  trees.
+- Tree-background performance remains substantially weaker than sky-background
+  performance.
+
+**Engineering conclusion:**
+Manual target initialization establishes initial identity but cannot compensate
+for unreliable visual measurements. The system will next be evaluated as an
+automatic sky-background tracker, while cluttered-background tracking is
+deferred to a future custom-detector/fine-tuning phase.
