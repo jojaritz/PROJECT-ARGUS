@@ -297,3 +297,21 @@ Manual target initialization establishes initial identity but cannot compensate
 for unreliable visual measurements. The system will next be evaluated as an
 automatic sky-background tracker, while cluttered-background tracking is
 deferred to a future custom-detector/fine-tuning phase.
+
+
+### Experiment 1.8 — Automatic Sky-Background Tracking
+
+**Test condition:** Approximately one-minute recorded video with a predominantly
+sky background. The tracker used automatic acquisition, `airplane` class
+priority, and a constant-velocity Kalman filter. Manual ROI initialization was
+not used as a required operating step.
+
+| Measurement | Observed result |
+|:---|:---|
+| Initial acquisition time | Approximately 3–4 seconds |
+| Test duration | Approximately 1 minute |
+| Track retention | The tracker rarely lost the drone |
+| Temporary detector-loss behavior | Predicted track remained reasonable; observed prediction gaps were no longer than approximately 10 frames |
+| Unrelated-target switching | Not observed in this test clip |
+| Overall result | Qualitative pass for the tested sky-background condition |
+
